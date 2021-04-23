@@ -1,0 +1,2 @@
+export const FEATURES_PROPORTION_TAG = 9;
+export const NUMBERS_PROPORTION_TAG = 3;
