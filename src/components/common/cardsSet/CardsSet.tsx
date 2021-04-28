@@ -1,5 +1,3 @@
-import React from "react";
-import { features } from "../../../tools/data";
 import Card from "../card/Card";
 import styles from "./CardsSet.module.scss";
 
@@ -11,7 +9,7 @@ export default function CardsSet(props: CardSetProps): JSX.Element {
   return (
     <section className={styles.cardsSet}>
       {props.data.map((el: string | number) => (
-        <Card title={el} />
+        <Card title={el} key={Math.random()} />
       ))}
     </section>
   );

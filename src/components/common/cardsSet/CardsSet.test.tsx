@@ -1,10 +1,19 @@
-import React from "react";
 import { cleanup, render } from "@testing-library/react";
-import HomePage from "../../home/HomePage";
+import CardsSet from "./CardsSet";
 
 afterEach(cleanup);
 
-it("Should render actions set", () => {
-  const { getByText } = render(<HomePage />);
-  getByText("ActionCard");
+function renderCardSet(args: string[] | number[]) {
+  const defaultProps = {
+    data: [],
+  };
+
+  const props = { ...defaultProps, ...args };
+
+  return render(<CardsSet {...props} />);
+}
+
+it("Should render card set with las, las, las", () => {
+  const { findByText } = renderCardSet(["las", "las", "las"]);
+  findByText("las");
 });

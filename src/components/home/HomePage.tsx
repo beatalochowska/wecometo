@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CardsSet from "../common/cardsSet/CardsSet";
 import styles from "./HomePage.module.scss";
-import { features, getRandomElement, numbers } from "../../tools/data";
+import { features, numbers, setCurrent } from "../../tools/data";
 
 export default function HomePage(): JSX.Element {
   const [featuresList, setFeaturesList] = useState<string[]>([...features]);
@@ -10,30 +10,13 @@ export default function HomePage(): JSX.Element {
   const [currentNumbers, setCurrentNumbers] = useState<number[]>([]);
 
   useEffect(() => {
-    setCurrentFeatures([
-      getRandomElement(featuresList, setFeaturesList),
-      getRandomElement(featuresList, setFeaturesList),
-      getRandomElement(featuresList, setFeaturesList),
-    ]);
-    setCurrentNumbers([
-      getRandomElement(numbersList, setNumbersList),
-      getRandomElement(numbersList, setNumbersList),
-      getRandomElement(numbersList, setNumbersList),
-    ]);
+    setCurrent(setCurrentFeatures, featuresList, setFeaturesList);
+    setCurrent(setCurrentNumbers, numbersList, setNumbersList);
   }, []);
 
   const handleNextClick = () => {
-    console.log(numbersList);
-    setCurrentFeatures([
-      getRandomElement(featuresList, setFeaturesList),
-      getRandomElement(featuresList, setFeaturesList),
-      getRandomElement(featuresList, setFeaturesList),
-    ]);
-    setCurrentNumbers([
-      getRandomElement(numbersList, setNumbersList),
-      getRandomElement(numbersList, setNumbersList),
-      getRandomElement(numbersList, setNumbersList),
-    ]);
+    setCurrent(setCurrentFeatures, featuresList, setFeaturesList);
+    setCurrent(setCurrentNumbers, numbersList, setNumbersList);
 
     if (featuresList.length === 0) {
       setFeaturesList([...features]);

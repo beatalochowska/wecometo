@@ -1,7 +1,5 @@
 import * as constants from "../constants/constants";
 
-export const exnumbers = [1, 2, 3];
-
 const numbers_groups = [
   [1, 2, 14, 15],
   [3, 13],
@@ -50,26 +48,23 @@ const generateFeatures = (): string[] => {
 
 export const features = generateFeatures();
 
-// const getRandomElement = (
-//   remainingFeatures: any[],
-//   setStateFunction: React.Dispatch<React.SetStateAction<any[]>>
-// ) => {
-//   const randomIndex = Math.floor(Math.random() * remainingFeatures.length);
-//   const item = remainingFeatures[randomIndex];
-//   remainingFeatures.splice(randomIndex, 1);
-//   setStateFunction(remainingFeatures);
-
-//   return item;
-// };
-
-export const getRandomElement = <T>(
-  arr: T[],
-  callback: (arr: T[]) => void
-): T => {
+const getRandomElement = <T>(arr: T[], callback: (arr: T[]) => void): T => {
   const randomIndex = Math.floor(Math.random() * arr.length);
   const item = arr[randomIndex];
   arr.splice(randomIndex, 1);
   callback(arr);
 
   return item;
+};
+
+export const setCurrent = <T>(
+  setCurrentElements: (arr: T[]) => void,
+  arr: T[],
+  setArray: (arr: T[]) => void
+): void => {
+  setCurrentElements([
+    getRandomElement(arr, setArray),
+    getRandomElement(arr, setArray),
+    getRandomElement(arr, setArray),
+  ]);
 };
