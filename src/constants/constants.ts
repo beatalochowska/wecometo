@@ -1,2 +1,2 @@
-export const FEATURES_PROPORTION_TAG = 9;
-export const NUMBERS_PROPORTION_TAG = 3;
+export const FEATURES_MULTIPLY = 9;
+export const NUMBERS_MULTIPLY = 3;

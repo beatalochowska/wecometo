@@ -7,3 +7,8 @@ it("Should render Welcome to my street", () => {
   const { getByText } = render(<HomePage />);
   getByText("Welcome to my street");
 });
+
+it("Should render Next button", () => {
+  const { getByText } = render(<HomePage />);
+  getByText("NEXT");
+});

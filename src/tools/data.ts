@@ -1,6 +1,6 @@
 import * as constants from "../constants/constants";
 
-const numbers_groups = [
+const numbersGroup = [
   [1, 2, 14, 15],
   [3, 13],
   [4, 12],
@@ -10,7 +10,7 @@ const numbers_groups = [
   [8],
 ];
 
-const features_proportion = [
+const featuresGroup = [
   "giełda",
   "giełda",
   "płot",
@@ -24,10 +24,10 @@ const features_proportion = [
 
 const generateNumbers = (): number[] => {
   const allNumbers: number[] = [];
-  let counter = constants.NUMBERS_PROPORTION_TAG;
-  for (let i = 0; i < numbers_groups.length; i++) {
+  let counter = constants.NUMBERS_MULTIPLY;
+  for (let i = 0; i < numbersGroup.length; i++) {
     for (let j = 0; j < counter; j++) {
-      allNumbers.push(...numbers_groups[i]);
+      allNumbers.push(...numbersGroup[i]);
     }
     counter++;
   }
@@ -39,8 +39,8 @@ export const numbers = generateNumbers();
 
 const generateFeatures = (): string[] => {
   const allFeatures: string[] = [];
-  for (let i = 0; i < constants.FEATURES_PROPORTION_TAG; i++) {
-    allFeatures.push(...features_proportion);
+  for (let i = 0; i < constants.FEATURES_MULTIPLY; i++) {
+    allFeatures.push(...featuresGroup);
   }
 
   return allFeatures;
@@ -48,23 +48,20 @@ const generateFeatures = (): string[] => {
 
 export const features = generateFeatures();
 
-const getRandomElement = <T>(arr: T[], callback: (arr: T[]) => void): T => {
+export const getRandomIndex = <T>(arr: T[]): number => {
   const randomIndex = Math.floor(Math.random() * arr.length);
-  const item = arr[randomIndex];
-  arr.splice(randomIndex, 1);
-  callback(arr);
 
-  return item;
+  return randomIndex;
 };
 
-export const setCurrent = <T>(
-  setCurrentElements: (arr: T[]) => void,
-  arr: T[],
-  setArray: (arr: T[]) => void
-): void => {
-  setCurrentElements([
-    getRandomElement(arr, setArray),
-    getRandomElement(arr, setArray),
-    getRandomElement(arr, setArray),
-  ]);
+export const getDecrementedArray = <T>(arr: T[], index: number): T[] => {
+  arr.splice(index, 1);
+
+  return arr;
+};
+
+export const getRandomElement = <T>(arr: T[], index: number): T => {
+  const randomElement = arr[index];
+
+  return randomElement;
 };
