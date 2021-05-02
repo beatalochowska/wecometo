@@ -2,20 +2,25 @@ import { useEffect, useState } from "react";
 import CardsSet from "../common/cardsSet/CardsSet";
 import styles from "./HomePage.module.scss";
 import {
-  features,
-  numbers,
   getRandomIndex,
   getCurrentElement,
   getArrayWithDeletedCurrentElement,
-} from "../../tools/data";
+} from "./helpers";
+
+import features from "../../tools/features.json";
+import { SingleFeature } from "../../tools/featureInterface";
+import numbers from "../../tools/numbers.json";
+import { SigleNumber } from "../../tools/numberInterface";
 
 export default function HomePage(): JSX.Element {
-  const [featuresList, setFeaturesList] = useState<string[]>([...features]);
-  const [currentFeatures, setCurrentFeatures] = useState<string[]>([]);
-  const [numbersList, setNumbersList] = useState<number[]>([...numbers]);
-  const [currentNumbers, setCurrentNumbers] = useState<number[]>([]);
+  const [featuresList, setFeaturesList] = useState<SingleFeature[]>([
+    ...features,
+  ]);
+  const [currentFeatures, setCurrentFeatures] = useState<SingleFeature[]>([]);
+  const [numbersList, setNumbersList] = useState<SigleNumber[]>([...numbers]);
+  const [currentNumbers, setCurrentNumbers] = useState<SigleNumber[]>([]);
 
-  const setCurrentFeatureCard = () => {
+  const setCurrentFeatureCard = (): SingleFeature => {
     const randomIndex = getRandomIndex(featuresList);
     const currentElement = getCurrentElement(featuresList, randomIndex);
     setFeaturesList(
@@ -25,7 +30,7 @@ export default function HomePage(): JSX.Element {
     return currentElement;
   };
 
-  const setCurrentNumberCard = () => {
+  const setCurrentNumberCard = (): SigleNumber => {
     const randomIndex = getRandomIndex(numbersList);
     const currentElement = getCurrentElement(numbersList, randomIndex);
     setNumbersList(getArrayWithDeletedCurrentElement(numbersList, randomIndex));
@@ -33,7 +38,7 @@ export default function HomePage(): JSX.Element {
     return currentElement;
   };
 
-  const setCurrentFeatureCardSet = () => {
+  const setCurrentFeatureCardSet = (): void => {
     setCurrentFeatures([
       setCurrentFeatureCard(),
       setCurrentFeatureCard(),
@@ -41,7 +46,7 @@ export default function HomePage(): JSX.Element {
     ]);
   };
 
-  const setCurrentNumberCardSet = () => {
+  const setCurrentNumberCardSet = (): void => {
     setCurrentNumbers([
       setCurrentNumberCard(),
       setCurrentNumberCard(),
@@ -49,12 +54,12 @@ export default function HomePage(): JSX.Element {
     ]);
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     setCurrentFeatureCardSet();
     setCurrentNumberCardSet();
   }, []);
 
-  const handleNextClick = () => {
+  const handleNextClick = (): void => {
     setCurrentFeatureCardSet();
     setCurrentNumberCardSet();
 

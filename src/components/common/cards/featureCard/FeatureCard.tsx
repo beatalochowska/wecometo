@@ -1,6 +1,9 @@
 import styles from "../Card.module.scss";
 
-export default function FeatureCard(props: { title: string }): JSX.Element {
+interface FeatureCardProps {
+  title: string;
+}
+export default function FeatureCard(props: FeatureCardProps): JSX.Element {
   return (
     <div className={styles.card}>
       <h2 className={styles.cardContent}>{props.title}</h2>
