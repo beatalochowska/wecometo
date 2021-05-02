@@ -1,3 +1,5 @@
+@import "../../../styles/colors.scss";
+
 .card {
   position: relative;
   width: 100%;
@@ -19,6 +21,35 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   text-align: center;
+}
+
+.stock {
+  color: $stock;
+  border: 10px solid $stock;
+}
+
+.work {
+  color: $work;
+  border: 10px solid $work;
+}
+
+.fence {
+  color: $fence;
+  border: 10px solid $fence;
+}
+
+.park {
+  color: $park;
+  border: 10px solid $park;
+}
+
+.pool {
+  color: $pool;
+  border: 10px solid $pool;
+}
+.bis {
+  color: $bis;
+  border: 10px solid $bis;
 }
 
 @media (min-width: 920px) {
