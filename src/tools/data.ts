@@ -54,14 +54,17 @@ export const getRandomIndex = <T>(arr: T[]): number => {
   return randomIndex;
 };
 
-export const getDecrementedArray = <T>(arr: T[], index: number): T[] => {
+export const getArrayWithDeletedCurrentElement = <T>(
+  arr: T[],
+  index: number
+): T[] => {
   arr.splice(index, 1);
 
   return arr;
 };
 
-export const getRandomElement = <T>(arr: T[], index: number): T => {
-  const randomElement = arr[index];
+export const getCurrentElement = <T>(arr: T[], index: number): T => {
+  const currentElement = arr[index];
 
-  return randomElement;
+  return currentElement;
 };

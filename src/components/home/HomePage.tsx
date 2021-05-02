@@ -5,8 +5,8 @@ import {
   features,
   numbers,
   getRandomIndex,
-  getRandomElement,
-  getDecrementedArray,
+  getCurrentElement,
+  getArrayWithDeletedCurrentElement,
 } from "../../tools/data";
 
 export default function HomePage(): JSX.Element {
@@ -17,18 +17,20 @@ export default function HomePage(): JSX.Element {
 
   const setCurrentFeatureCard = () => {
     const randomIndex = getRandomIndex(featuresList);
-    const randomElement = getRandomElement(featuresList, randomIndex);
-    setFeaturesList(getDecrementedArray(featuresList, randomIndex));
+    const currentElement = getCurrentElement(featuresList, randomIndex);
+    setFeaturesList(
+      getArrayWithDeletedCurrentElement(featuresList, randomIndex)
+    );
 
-    return randomElement;
+    return currentElement;
   };
 
-  const setCurrentNumbereCard = () => {
+  const setCurrentNumberCard = () => {
     const randomIndex = getRandomIndex(numbersList);
-    const randomElement = getRandomElement(numbersList, randomIndex);
-    setNumbersList(getDecrementedArray(numbersList, randomIndex));
+    const currentElement = getCurrentElement(numbersList, randomIndex);
+    setNumbersList(getArrayWithDeletedCurrentElement(numbersList, randomIndex));
 
-    return randomElement;
+    return currentElement;
   };
 
   const setCurrentFeatureCardSet = () => {
@@ -39,22 +41,22 @@ export default function HomePage(): JSX.Element {
     ]);
   };
 
-  const setCurrentNumbereCardSet = () => {
+  const setCurrentNumberCardSet = () => {
     setCurrentNumbers([
-      setCurrentNumbereCard(),
-      setCurrentNumbereCard(),
-      setCurrentNumbereCard(),
+      setCurrentNumberCard(),
+      setCurrentNumberCard(),
+      setCurrentNumberCard(),
     ]);
   };
 
   useEffect(() => {
     setCurrentFeatureCardSet();
-    setCurrentNumbereCardSet();
+    setCurrentNumberCardSet();
   }, []);
 
   const handleNextClick = () => {
     setCurrentFeatureCardSet();
-    setCurrentNumbereCardSet();
+    setCurrentNumberCardSet();
 
     if (featuresList.length === 0) {
       setFeaturesList([...features]);
