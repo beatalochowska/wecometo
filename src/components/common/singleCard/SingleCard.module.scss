@@ -4,7 +4,7 @@
   position: relative;
   width: 100%;
   margin: 2%;
-  padding-top: 40%;
+  padding-top: 30%;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -21,6 +21,12 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardText {
+  margin: 0;
 }
 
 .stock {
@@ -55,7 +61,7 @@
 @media (min-width: 920px) {
   .card {
     width: 270px;
-    height: 370px;
+    height: 296px;
     padding: 0;
   }
 }

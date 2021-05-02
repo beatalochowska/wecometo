@@ -1,8 +1,9 @@
-import styles from "../Card.module.scss";
-import * as feature from "../../../../constants/features";
+import styles from "./SingleCard.module.scss";
+import * as feature from "../../../constants/features";
 
-interface FeatureCardProps {
-  title: string;
+interface SingleCardProps {
+  name: string;
+  number: number;
 }
 
 const createCardStyle = (name: string, elementStyle: string): string => {
@@ -24,12 +25,15 @@ const createCardStyle = (name: string, elementStyle: string): string => {
       return style;
   }
 };
-export default function FeatureCard(props: FeatureCardProps): JSX.Element {
-  console.log(props.title);
+export default function SingleCard(props: SingleCardProps): JSX.Element {
+  console.log(props.name);
 
   return (
-    <div className={createCardStyle(props.title, styles.card)}>
-      <h2 className={styles.cardContent}>{props.title}</h2>
+    <div className={createCardStyle(props.name, styles.card)}>
+      <div className={styles.cardContent}>
+        <h2 className={styles.cardText}>{props.number}</h2>
+        <h3 className={styles.cardText}>{props.name}</h3>
+      </div>
     </div>
   );
 }

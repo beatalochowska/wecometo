@@ -1,23 +1,30 @@
 import styles from "./CardsSet.module.scss";
 import { SigleNumber } from "../../../tools/numberInterface";
 import { SingleFeature } from "../../../tools/featureInterface";
-import NumberCard from "../cards/numberCard/NumberCard";
-import FeatureCard from "../cards/featureCard/FeatureCard";
+import React from "react";
+import SingleCard from "../singleCard/SingleCard";
 
 interface CardSetProps {
-  data: SingleFeature[] | SigleNumber[];
+  numbers: SigleNumber[];
+  features: SingleFeature[];
+}
+
+interface SingleCard {
+  name: string;
+  number: number;
+  id: number;
 }
 
 export default function CardsSet(props: CardSetProps): JSX.Element {
+  const singleCard = props.numbers.map((el: SigleNumber, i: number) =>
+    Object.assign({}, el, props.features[i])
+  );
+
   return (
     <section className={styles.cardsSet}>
-      {props.data.map((el: SingleFeature | SigleNumber) =>
-        "name" in el ? (
-          <FeatureCard title={el.name} key={el.id} />
-        ) : (
-          <NumberCard title={el.number} key={el.id} />
-        )
-      )}
+      {singleCard.map((el: SingleCard) => (
+        <SingleCard name={el.name} number={el.number} key={el.id} />
+      ))}
     </section>
   );
 }

@@ -75,8 +75,7 @@ export default function HomePage(): JSX.Element {
   return (
     <section className={styles.homePage}>
       <h1 className={styles.title}>Welcome to my street</h1>
-      <CardsSet data={currentNumbers} />
-      <CardsSet data={currentFeatures} />
+      <CardsSet numbers={currentNumbers} features={currentFeatures} />
       <button className={styles.button} onClick={handleNextClick}>
         NEXT
       </button>
