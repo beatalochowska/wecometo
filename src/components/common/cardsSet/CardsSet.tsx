@@ -1,7 +1,6 @@
 import styles from "./CardsSet.module.scss";
 import { SigleNumber } from "../../../tools/numberInterface";
 import { SingleFeature } from "../../../tools/featureInterface";
-import React from "react";
 import SingleCard from "../singleCard/SingleCard";
 
 interface CardSetProps {

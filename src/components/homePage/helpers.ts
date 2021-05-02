@@ -1,5 +1,10 @@
+import seedrandom from "seedrandom";
+
+let seed = "czeko1adaje5tsuper!";
 export const getRandomIndex = <T>(arr: T[]): number => {
-  const randomIndex = Math.floor(Math.random() * arr.length);
+  seed = seed + "6*toff1te7";
+  seed = seed.substring(1);
+  const randomIndex = Math.floor(seedrandom(seed)() * arr.length);
 
   return randomIndex;
 };

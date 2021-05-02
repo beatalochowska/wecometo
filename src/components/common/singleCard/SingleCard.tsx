@@ -26,8 +26,6 @@ const createCardStyle = (name: string, elementStyle: string): string => {
   }
 };
 export default function SingleCard(props: SingleCardProps): JSX.Element {
-  console.log(props.name);
-
   return (
     <div className={createCardStyle(props.name, styles.card)}>
       <div className={styles.cardContent}>
