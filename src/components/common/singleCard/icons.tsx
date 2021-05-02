@@ -1,13 +1,10 @@
-export const stockIcon = (props?: {
-  width?: string;
-  height?: string;
-}): JSX.Element => {
+export const stockIcon = (props?: { height: string }): JSX.Element => {
   return (
     <svg
       viewBox="0 0 512 512"
       xmlns="http://www.w3.org/2000/svg"
       enableBackground="new 0 0 512 512"
-      style={{ width: "inherit", height: "inherit" }}
+      style={{ height: "inherit" }}
       {...props}
     >
       <g id="Flat">
@@ -183,7 +180,7 @@ export const parkIcon = (props?: {
       enableBackground="new 0 0 512 512"
       viewBox="0 0 512 512"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ width: "inherit", height: "inherit" }}
+      style={{ height: "inherit" }}
       {...props}
     >
       <g>
@@ -256,11 +253,9 @@ export const poolIcon = (props?: {
     <svg
       id="Layer_1"
       enableBackground="new 0 0 512 512"
-      height="inherit"
       viewBox="0 0 512 512"
-      width="inherit"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ width: "inherit", height: "inherit" }}
+      style={{ height: "inherit" }}
       {...props}
     >
       <g>
@@ -338,7 +333,7 @@ export const bisIcon = (props?: {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512 512"
-      style={{ width: "inherit", height: "inherit" }}
+      style={{ height: "inherit" }}
       {...props}
     >
       <path
@@ -402,7 +397,7 @@ export const workIcon = (props?: {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 511.886 511.886"
-      style={{ width: "inherit", height: "inherit" }}
+      style={{ height: "inherit" }}
       {...props}
     >
       <path

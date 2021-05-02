@@ -8,6 +8,12 @@
   src: local('Lobster'), url(./fonts/Lobster-Regular.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: 'Merienda';
+  src: local('Merienda'), url(./fonts/Merienda-Regular.ttf) format('truetype');
+}
+
+
 body {
   margin: 0;
   font-family: BerkshireSwash, serif;
