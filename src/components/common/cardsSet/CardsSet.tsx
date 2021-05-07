@@ -4,8 +4,7 @@ import { SingleFeature } from "../../../tools/featureInterface";
 import SingleCard from "../singleCard/SingleCard";
 
 interface CardSetProps {
-  numbers: SigleNumber[];
-  features: SingleFeature[];
+  currentCards: (SigleNumber & SingleFeature)[];
 }
 
 interface SingleCard {
@@ -15,13 +14,9 @@ interface SingleCard {
 }
 
 export default function CardsSet(props: CardSetProps): JSX.Element {
-  const singleCard = props.numbers.map((el: SigleNumber, i: number) =>
-    Object.assign({}, el, props.features[i])
-  );
-
   return (
     <section className={styles.cardsSet}>
-      {singleCard.map((el: SingleCard) => (
+      {props.currentCards.map((el: SigleNumber & SingleFeature) => (
         <SingleCard name={el.name} number={el.number} key={el.id} />
       ))}
     </section>

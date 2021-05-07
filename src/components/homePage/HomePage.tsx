@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import CardsSet from "../common/cardsSet/CardsSet";
 import styles from "./HomePage.module.scss";
-import {
-  getRandomIndex,
-  getCurrentElement,
-  getArrayWithDeletedCurrentElement,
-} from "./helpers";
+import { getRandomRate, getCurrentElement } from "./helpers";
 
 import features from "../../tools/features.json";
 import { SingleFeature } from "../../tools/featureInterface";
@@ -16,66 +12,69 @@ export default function HomePage(): JSX.Element {
   const [featuresList, setFeaturesList] = useState<SingleFeature[]>([
     ...features,
   ]);
-  const [currentFeatures, setCurrentFeatures] = useState<SingleFeature[]>([]);
   const [numbersList, setNumbersList] = useState<SigleNumber[]>([...numbers]);
-  const [currentNumbers, setCurrentNumbers] = useState<SigleNumber[]>([]);
+  const [currentCardIndex, setCurrentCardIndex] = useState<number>(0);
+  const [randList, setRandList] = useState([]);
 
-  const setCurrentFeatureCard = (): SingleFeature => {
-    const randomIndex = getRandomIndex(featuresList);
-    const currentElement = getCurrentElement(featuresList, randomIndex);
-    setFeaturesList(
-      getArrayWithDeletedCurrentElement(featuresList, randomIndex)
+  const [currentCardValues, setCurrentCardValues] = useState<
+    (SigleNumber & SingleFeature)[]
+  >([]);
+
+  const getRandomisedList = (arr: any[]): any[] => {
+    return arr.sort(() => getRandomRate(arr));
+  };
+
+  const getListOFNumbersFeaturesWithSortedIds = (
+    randomisedFeatures: SingleFeature[],
+    randomisedNumbers: SigleNumber[]
+  ): (SigleNumber & SingleFeature)[] => {
+    const featuresAndNumbersList = randomisedNumbers.map(
+      (el: SigleNumber, i: number) =>
+        Object.assign({}, el, randomisedFeatures[i], { id: i })
     );
 
-    return currentElement;
+    return featuresAndNumbersList;
   };
 
-  const setCurrentNumberCard = (): SigleNumber => {
-    const randomIndex = getRandomIndex(numbersList);
-    const currentElement = getCurrentElement(numbersList, randomIndex);
-    setNumbersList(getArrayWithDeletedCurrentElement(numbersList, randomIndex));
+  const setCurrentCardsSet = (
+    cardsAmount: number,
+    cardsList: (SigleNumber & SingleFeature)[]
+  ): (SigleNumber & SingleFeature)[] => {
+    const currentCards = [];
+    let index = currentCardIndex;
+    for (let i = index; i < index + cardsAmount; i++) {
+      currentCards.push(cardsList[i]);
+    }
+    index += cardsAmount;
+    setCurrentCardIndex(index);
 
-    return currentElement;
-  };
+    console.log(currentCards);
+    console.log(currentCardIndex);
 
-  const setCurrentFeatureCardSet = (): void => {
-    setCurrentFeatures([
-      setCurrentFeatureCard(),
-      setCurrentFeatureCard(),
-      setCurrentFeatureCard(),
-    ]);
+    return currentCards;
   };
+  const randomisedFeaturesList = getRandomisedList(featuresList);
+  const randomisedNumbersList = getRandomisedList(numbersList);
 
-  const setCurrentNumberCardSet = (): void => {
-    setCurrentNumbers([
-      setCurrentNumberCard(),
-      setCurrentNumberCard(),
-      setCurrentNumberCard(),
-    ]);
-  };
+  const randomisedList = getListOFNumbersFeaturesWithSortedIds(
+    randomisedFeaturesList,
+    randomisedNumbersList
+  );
 
   useEffect((): void => {
-    setCurrentFeatureCardSet();
-    setCurrentNumberCardSet();
+    console.log(randomisedList);
+    setCurrentCardValues(setCurrentCardsSet(3, randomisedList));
   }, []);
 
   const handleNextClick = (): void => {
-    setCurrentFeatureCardSet();
-    setCurrentNumberCardSet();
-
-    if (featuresList.length === 0) {
-      setFeaturesList([...features]);
-    }
-
-    if (numbersList.length === 0) {
-      setNumbersList([...numbers]);
-    }
+    console.log(randomisedList);
+    setCurrentCardValues(setCurrentCardsSet(3, randomisedList));
   };
 
   return (
     <section className={styles.homePage}>
       <h1 className={styles.title}>Welcome to my street</h1>
-      <CardsSet numbers={currentNumbers} features={currentFeatures} />
+      <CardsSet currentCards={currentCardValues} />
       <button className={styles.button} onClick={handleNextClick}>
         NEXT
       </button>
