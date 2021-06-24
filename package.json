@@ -5,11 +5,13 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/user-event": "^12.8.3",
+    "@types/chance": "^1.1.2",
     "@types/jest": "^26.0.22",
     "@types/node": "^12.20.7",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/seedrandom": "^3.0.0",
+    "chance": "^1.1.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
