@@ -1,1 +1,1 @@
-export const CARDS_AMOUNT = 3;
+export const CURRENT_CARDS_AMOUNT = 3;

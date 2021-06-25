@@ -1,4 +1,4 @@
-export interface SigleNumber {
+export interface SingleNumber {
   number: number;
   id: number;
 }
