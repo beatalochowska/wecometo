@@ -1,9 +1,0 @@
-.cardsSet {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  width: 100%;
-}
-/*# sourceMappingURL=CardsSet.module.css.map */

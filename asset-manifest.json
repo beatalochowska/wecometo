@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/wecometo/static/css/main.06adbcab.chunk.css",
+    "main.js": "/wecometo/static/js/main.cac60653.chunk.js",
+    "main.js.map": "/wecometo/static/js/main.cac60653.chunk.js.map",
+    "runtime-main.js": "/wecometo/static/js/runtime-main.e2f97398.js",
+    "runtime-main.js.map": "/wecometo/static/js/runtime-main.e2f97398.js.map",
+    "static/js/2.117e02c3.chunk.js": "/wecometo/static/js/2.117e02c3.chunk.js",
+    "static/js/2.117e02c3.chunk.js.map": "/wecometo/static/js/2.117e02c3.chunk.js.map",
+    "static/js/3.38b91ff3.chunk.js": "/wecometo/static/js/3.38b91ff3.chunk.js",
+    "static/js/3.38b91ff3.chunk.js.map": "/wecometo/static/js/3.38b91ff3.chunk.js.map",
+    "index.html": "/wecometo/index.html",
+    "static/css/main.06adbcab.chunk.css.map": "/wecometo/static/css/main.06adbcab.chunk.css.map",
+    "static/js/2.117e02c3.chunk.js.LICENSE.txt": "/wecometo/static/js/2.117e02c3.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/wecometo/static/media/Merienda-Regular.650d7290.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e2f97398.js",
+    "static/js/2.117e02c3.chunk.js",
+    "static/css/main.06adbcab.chunk.css",
+    "static/js/main.cac60653.chunk.js"
+  ]
+}
