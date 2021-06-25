@@ -29,15 +29,18 @@ export default function HomePage(): JSX.Element {
     const newIndex = index + cardsAmount;
     if (newIndex < randomisedList.length) {
       setCurrentCardIndex(index + cardsAmount);
-      setCurrentCardsValues(getCurrentCards(cardsList, index, cardsAmount));
+      setCurrentCardsValues(
+        getCurrentCards(cardsList, currentCardIndex, cardsAmount)
+      );
 
       return;
     }
     setCurrentCardIndex(0);
-    setUserSeed(userSeed + "la123");
+    setUserSeed(userSeed + "1a!");
     setRandomisedList(randomiseCardsList(userSeed));
-
-    setCurrentCardsValues(getCurrentCards(cardsList, newIndex, cardsAmount));
+    setCurrentCardsValues(
+      getCurrentCards(cardsList, currentCardIndex, cardsAmount)
+    );
   };
 
   const handleChangeUserSeed = (event: any): void => {
@@ -45,6 +48,7 @@ export default function HomePage(): JSX.Element {
   };
 
   const handleSeedSubmit = (event: any): void => {
+    console.log(randomisedList);
     event.preventDefault();
     setShouldRandomiseCards(true);
     const newRandomisedList = randomiseCardsList(userSeed);
