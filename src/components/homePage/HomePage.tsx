@@ -28,7 +28,7 @@ export default function HomePage(): JSX.Element {
   ): void => {
     const newIndex = index + cardsAmount;
     if (newIndex < randomisedList.length) {
-      setCurrentCardIndex(index + cardsAmount);
+      setCurrentCardIndex(newIndex);
       setCurrentCardsValues(
         getCurrentCards(cardsList, currentCardIndex, cardsAmount)
       );
