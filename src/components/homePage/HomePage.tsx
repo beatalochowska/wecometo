@@ -1,13 +1,8 @@
 import { useState } from "react";
 import CardsSet from "./cardsSet/CardsSet";
 import styles from "./HomePage.module.scss";
-import {
-  getListOFNumbersFeaturesWithSortedIds,
-  getRandomisedList,
-} from "./helpers";
+import { getCurrentCards, randomiseCardsList } from "./helpers";
 
-import features from "../../tools/features.json";
-import numbers from "../../tools/numbers.json";
 import { CURRENT_CARDS_AMOUNT } from "../../constants/cardsAmount";
 import UserSeedInput from "./userSeedInput/UserSeedInput";
 
@@ -22,30 +17,27 @@ export default function HomePage(): JSX.Element {
   const [currentCardsValues, setCurrentCardsValues] = useState<Card[]>([]);
   const [userSeed, setUserSeed] = useState<string>("");
   const [shouldShowCards, setShouldRandomiseCards] = useState<boolean>(false);
-  const [randomisedList, setRandomisedList] = useState<Card[]>([]);
+  const [randomisedList, setRandomisedList] = useState<Card[]>(
+    randomiseCardsList(userSeed)
+  );
 
-  const setCurrentCardsSet = (cardsList: Card[]): Card[] => {
-    const currentCards = [];
-    let index = currentCardIndex;
-    for (let i = index; i < index + CURRENT_CARDS_AMOUNT; i++) {
-      currentCards.push(cardsList[i]);
-    }
-    index += CURRENT_CARDS_AMOUNT;
-    if (index < randomisedList.length) {
-      setCurrentCardIndex(index);
+  const setCurrentCardsSet = (
+    cardsList: Card[],
+    index: number,
+    cardsAmount: number = CURRENT_CARDS_AMOUNT
+  ): void => {
+    const newIndex = index + cardsAmount;
+    if (newIndex < randomisedList.length) {
+      setCurrentCardIndex(index + cardsAmount);
+      setCurrentCardsValues(getCurrentCards(cardsList, index, cardsAmount));
 
-      return currentCards;
+      return;
     }
     setCurrentCardIndex(0);
     setUserSeed(userSeed + "la123");
-    setRandomisedList(
-      getListOFNumbersFeaturesWithSortedIds(
-        getRandomisedList([...features], userSeed),
-        getRandomisedList([...numbers], userSeed)
-      )
-    );
+    setRandomisedList(randomiseCardsList(userSeed));
 
-    return currentCards;
+    setCurrentCardsValues(getCurrentCards(cardsList, newIndex, cardsAmount));
   };
 
   const handleChangeUserSeed = (event: any): void => {
@@ -55,16 +47,15 @@ export default function HomePage(): JSX.Element {
   const handleSeedSubmit = (event: any): void => {
     event.preventDefault();
     setShouldRandomiseCards(true);
-    const newRandomisedList = getListOFNumbersFeaturesWithSortedIds(
-      getRandomisedList([...features], userSeed),
-      getRandomisedList([...numbers], userSeed)
-    );
+    const newRandomisedList = randomiseCardsList(userSeed);
 
-    setCurrentCardsValues(setCurrentCardsSet(newRandomisedList));
+    setCurrentCardsSet(newRandomisedList, currentCardIndex);
   };
 
-  const handleNextClick = (): void => {
-    setCurrentCardsValues(setCurrentCardsSet(randomisedList));
+  const handleNextClick = (event: any): void => {
+    event.preventDefault();
+
+    setCurrentCardsSet(randomisedList, currentCardIndex);
   };
 
   return (
