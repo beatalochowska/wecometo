@@ -28,8 +28,10 @@ export default function HomePage(): JSX.Element {
   ): void => {
     const newIndex = index + cardsAmount;
     if (newIndex < randomisedList.length) {
-      setCurrentCardIndex(index + cardsAmount);
-      setCurrentCardsValues(getCurrentCards(cardsList, index, cardsAmount));
+      setCurrentCardIndex(newIndex);
+      setCurrentCardsValues(
+        getCurrentCards(cardsList, currentCardIndex, cardsAmount)
+      );
 
       return;
     }
@@ -37,7 +39,9 @@ export default function HomePage(): JSX.Element {
     setUserSeed(userSeed + "la123");
     setRandomisedList(randomiseCardsList(userSeed));
 
-    setCurrentCardsValues(getCurrentCards(cardsList, newIndex, cardsAmount));
+    setCurrentCardsValues(
+      getCurrentCards(cardsList, currentCardIndex, cardsAmount)
+    );
   };
 
   const handleChangeUserSeed = (event: any): void => {
