@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CardsSet from "../common/cardsSet/CardsSet";
+import CardsSet from "./cardsSet/CardsSet";
 import styles from "./HomePage.module.scss";
 import {
   getListOFNumbersFeaturesWithSortedIds,
@@ -7,30 +7,24 @@ import {
 } from "./helpers";
 
 import features from "../../tools/features.json";
-import { SingleFeature } from "../../tools/featureInterface";
 import numbers from "../../tools/numbers.json";
-import { SingleNumber } from "../../tools/numberInterface";
 import { CURRENT_CARDS_AMOUNT } from "../../constants/cardsAmount";
+import UserSeedInput from "./userSeedInput/UserSeedInput";
+
+export interface Card {
+  number: number;
+  name: string;
+  id: number;
+}
 
 export default function HomePage(): JSX.Element {
   const [currentCardIndex, setCurrentCardIndex] = useState<number>(0);
-  const [currentCardValues, setCurrentCardValues] = useState<
-    (SingleNumber & SingleFeature)[]
-  >([]);
+  const [currentCardsValues, setCurrentCardsValues] = useState<Card[]>([]);
   const [userSeed, setUserSeed] = useState<string>("");
   const [shouldShowCards, setShouldRandomiseCards] = useState<boolean>(false);
-  const [randomisedList, setRandomisedList] = useState<
-    (SingleNumber & SingleFeature)[]
-  >(
-    getListOFNumbersFeaturesWithSortedIds(
-      getRandomisedList([...features], userSeed),
-      getRandomisedList([...numbers], userSeed)
-    )
-  );
+  const [randomisedList, setRandomisedList] = useState<Card[]>([]);
 
-  const setCurrentCardsSet = (
-    cardsList: (SingleNumber & SingleFeature)[]
-  ): (SingleNumber & SingleFeature)[] => {
+  const setCurrentCardsSet = (cardsList: Card[]): Card[] => {
     const currentCards = [];
     let index = currentCardIndex;
     for (let i = index; i < index + CURRENT_CARDS_AMOUNT; i++) {
@@ -54,11 +48,6 @@ export default function HomePage(): JSX.Element {
     return currentCards;
   };
 
-  const handleNextClick = (event: any): void => {
-    event.preventDefault();
-    setCurrentCardValues(setCurrentCardsSet(randomisedList));
-  };
-
   const handleChangeUserSeed = (event: any): void => {
     setUserSeed(event.target.value);
   };
@@ -66,26 +55,30 @@ export default function HomePage(): JSX.Element {
   const handleSeedSubmit = (event: any): void => {
     event.preventDefault();
     setShouldRandomiseCards(true);
-    const newCreatedRandomizedListOfCards: (SingleNumber & SingleFeature)[] =
-      getListOFNumbersFeaturesWithSortedIds(
-        getRandomisedList([...features], userSeed),
-        getRandomisedList([...numbers], userSeed)
-      );
-    setCurrentCardValues(setCurrentCardsSet(newCreatedRandomizedListOfCards));
-    setRandomisedList(newCreatedRandomizedListOfCards);
+    const newRandomisedList = getListOFNumbersFeaturesWithSortedIds(
+      getRandomisedList([...features], userSeed),
+      getRandomisedList([...numbers], userSeed)
+    );
+
+    setCurrentCardsValues(setCurrentCardsSet(newRandomisedList));
+  };
+
+  const handleNextClick = (): void => {
+    setCurrentCardsValues(setCurrentCardsSet(randomisedList));
   };
 
   return (
     <section className={styles.homePage}>
       <h1 className={styles.title}>Welcome to my street</h1>
-      <form onSubmit={handleSeedSubmit}>
-        <input type="text" value={userSeed} onChange={handleChangeUserSeed} />
-        <input type="submit" value="Generuj karty" />
-      </form>
+      <UserSeedInput
+        onSubmit={handleSeedSubmit}
+        userInput={userSeed}
+        onUserInputChange={handleChangeUserSeed}
+      />
 
       {shouldShowCards && (
         <>
-          <CardsSet currentCards={currentCardValues} />
+          <CardsSet currentCards={currentCardsValues} />
           <button className={styles.button} onClick={handleNextClick}>
             NEXT
           </button>
